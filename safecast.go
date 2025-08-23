@@ -37,14 +37,14 @@ const all64bitsOne = ^uint64(0) // same as uint64(math.MaxUint64)
 // will error for Convert[uint64](uint64(math.MaxUint64)) because it needs to
 // when converting to any float.
 func Convert[NumOut Number, NumIn Number](orig NumIn) (converted NumOut, err error) {
-	origPositive := orig > 0
+	origPositive := orig >= 0
 	// all bits set on uint64 is the only special case not detected by roundtrip (afaik).
 	if origPositive && (uint64(orig) == all64bitsOne) {
 		err = ErrOutOfRange
 		return
 	}
 	converted = NumOut(orig)
-	if origPositive != (converted > 0) {
+	if origPositive != (converted >= 0) {
 		err = ErrOutOfRange
 		return
 	}
