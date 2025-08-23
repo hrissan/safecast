@@ -317,15 +317,15 @@ func testCasts[Arg safecast.Number](t *testing.T, arg Arg) {
 	testCast[uint32](t, arg)
 	testCast[uint64](t, arg)
 	testCast[uintptr](t, arg)
-	// testCast[float32](t, arg)
-	// testCast[float64](t, arg)
+	testCast[float32](t, arg)
+	testCast[float64](t, arg)
 }
 
 func testCastsFromInteger[Arg safecast.Number](t *testing.T) {
 	for highBits := uint64(0); highBits < 16; highBits++ {
 		pattern1 := uint64((1<<64)-1) ^ (highBits << 60) // 00..00XXFF..FF
-		pattern2 := highBits << 60                       // 00..00XX00..00F
-		pattern3 := uint64((1<<64)-1) ^ highBits         // FF..FFXX00..00F
+		pattern2 := highBits << 60                       // 00..00XX00..00
+		pattern3 := uint64((1<<64)-1) ^ highBits         // FF..FFXX00..00
 		for sh := 0; sh < 64; sh++ {
 			testCasts(t, Arg(pattern1>>sh))
 			testCasts(t, Arg(pattern2>>sh))
@@ -347,5 +347,5 @@ func TestPatterns(t *testing.T) {
 	testCastsFromInteger[uint64](t)
 	testCastsFromInteger[uintptr](t)
 	// testCastsFromFloat[float32](t)
-	// testCastsFromInteger[float64](t)
+	// testCastsFromFloat[float64](t)
 }
