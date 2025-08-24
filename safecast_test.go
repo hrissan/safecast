@@ -263,13 +263,13 @@ func ExampleMustRound() {
 //
 //	src := 72057594037927936 // 2^56
 //	dst := safecast.MustConvert[float32](src)
-//	t.Logf("%d (0x%x) -> %s (%s)", src, src,
+//	t.Logf("0x%x -> %s (%s)", src,
 //		strconv.FormatFloat(float64(dst), 'f', -1, 32),
 //		strconv.FormatFloat(float64(dst), 'x', -1, 32))
 //
 // It prints
 //
-//	72057594037927936 (0x100000000000000) -> 72057594000000000 (0x1p+56)
+//	0x100000000000000 -> 72057594000000000 (0x1p+56)
 //
 // So despite the actual number (float hex format is lossless)
 // being stored in float is 72057594037927936,

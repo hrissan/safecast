@@ -41,7 +41,7 @@ func Convert[NumOut Number, NumIn Number](orig NumIn) (converted NumOut, err err
 	if NumIn(converted) != orig {
 		// checking for NaNs is completely optimized out for integer types.
 		// we declare NaN mantissa bits truncation during float64 -> float32 conversion as safe
-		bothNaN := (orig != orig) && (converted != converted)
+		bothNaN := (orig != orig) && (converted != converted) //nolint:gocritic // standard NaNs trick
 		if !bothNaN {
 			err = ErrOutOfRange
 		}
